@@ -12,17 +12,15 @@ export const otpcallin = (phone) => {
     client.verify.v2
         .services(serviceSID)
         .verifications.create({ to: `+91${phone}`, channel: "sms" })
-        .then((verification) => console.log(verification.sid))
+        .then((verification) => console.log('otp send successfully'))
         .catch((error) => console.log(error.message));
 };
 export const verifyOtp = (phone, otp) => {
   return new Promise((resolve, reject) => {
-    console.log(phone, otp);
     client.verify.v2
         .services(serviceSID)
       .verificationChecks.create({ to: `+91${phone}`, code: otp })
       .then((response) =>{
-        console.log(response)
          resolve(response.valid)})
       .catch((error) => reject(error.message));
   });

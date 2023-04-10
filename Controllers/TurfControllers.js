@@ -53,7 +53,6 @@ export const turfDetails = (req, res, next) => {
 }
 
 export const updateTurfDetails = (req, res, next) => {
-    console.log(req.body)
     const data = req.body
     turfmodel.updateOne({ _id: req.user.id }, { $set: data }).then(() => res.status(200).json({ message: 'Turf Details Updated' }))
         .catch(err => res.status(500).json(err))
@@ -69,6 +68,5 @@ export const turfDetailsUser = (req, res, next) => {
 
 export const turfCount = async (req, res) => {
     const data = await turfmodel.find({ request: true, block: false }).count().catch(err => res.status(500).json(err))
-    console.log(data)
     res.status(200).json(data)
 }

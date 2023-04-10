@@ -48,15 +48,14 @@ export const otpResend = (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
-        const user = await turfmodel.findOne({ email: req.body.email }).catch(err => next(err))
+        const user = await turfmodel.findOne({ email: req.body.email })
         if (!user) return res.status(401).json({ message: "Invalid credentials." });
-        const isMatch = await bcrypt.compare(req.body.password, user.password).catch(err => next(err))
+        const isMatch = await bcrypt.compare(req.body.password, user.password)
         if (!isMatch) return res.status(401).json({ message: "Invalid credentials.." });
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
         res.status(200).json({ token });
     }
     catch (err) {
-        console.log(err)
         next(err)
     }
 }

@@ -1,7 +1,7 @@
 import express from 'express'
 import { otpResend, otpValidation, registration, SendOtp, login } from '../Controllers/Authcontroller.js'
 import { bookedTurfs, earningReport, getBookedSlots } from '../Controllers/BookingControllers.js'
-import { getpaymentDetails, getTurfGraphData, getTurfBookingCount } from '../Controllers/DashboardControllers.js'
+import { getpaymentDetails, getTurfGraphData, getTurfBookingCount, withdrawalRequest } from '../Controllers/DashboardControllers.js'
 import { updateRating, getReviews } from '../Controllers/ReviewControllers.js'
 import { getAllTurfs, getLocationWiseTurf, turfDetails, updateTurfDetails, turfDetailsUser } from '../Controllers/TurfControllers.js'
 import { authVeify } from '../Helpers/JWT.js'
@@ -59,6 +59,8 @@ router.get('/profit-details', authVeify, getpaymentDetails)
 router.get('/turf-graph-data', authVeify, getTurfGraphData)
 
 router.get('/turf-bookings-count', authVeify, getTurfBookingCount)
+
+router.get('/turf-payment-request', authVeify, withdrawalRequest)
 
 //
 
