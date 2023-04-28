@@ -13,7 +13,7 @@ export const updateRating = async (req, res, next) => {
 
 export const getReviews = async (req, res, next) => {
     try {
-        const { data } = AxiosReviw.get('/get-review', { params: { id :req.query.id} })
+        const { data } = await AxiosReviw.get('/get-review', { params: { id: req.query.id } })
         return res.status(200).json(data)
     }
     catch (err) {
