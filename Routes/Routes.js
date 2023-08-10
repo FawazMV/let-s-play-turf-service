@@ -21,7 +21,7 @@ router.post('/turf-login', login)
 
 router.get('/turf-profile', authVeify, turfDetails)
 
-router.patch('/update-turf-profile', authVeify, updateTurfDetails)
+router.put('/update-turf-profile', authVeify, updateTurfDetails)
 
 
 router.get('/turfs', getAllTurfs)
@@ -49,7 +49,7 @@ router.get('/booked-slots', getBookedSlots)
 //reviews
 router.get('/get-review', getReviews)
 
-router.patch('/rating-update', updateRating)
+router.put('/rating-update', updateRating)
 
 
 // dashboard functions

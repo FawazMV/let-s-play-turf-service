@@ -10,11 +10,11 @@ router.get('/all-turfs', getAllTurfsAdmin)
 
 router.get('/requests', getTurfRequests)
 
-router.patch('/accept', reqAccept)
+router.put('/accept', reqAccept)
 
 router.delete('/cancel', reqCancel)
 
-router.patch('/manage', ManageTurf)
+router.put('/manage', ManageTurf)
 
 
 
