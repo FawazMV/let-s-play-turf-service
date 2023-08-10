@@ -9,9 +9,16 @@ export const registration = async (req, res, next) => {
         const salt = await bcrypt.genSalt();
         if (!req?.files?.length) return res.status(500).json({ message: 'Image not found' })
         const hashedPassword = await bcrypt.hash(password, salt);
+
+        const imageUrls = [];
+        for (const file of req.files) {
+            const imageUrl = await uploadImageToFirebase(file);
+            imageUrls.push({ location: imageUrl });
+        }
+
         const newUser = new turfmodel({
             courtName, email, mobile, location, distric, state, event, loction_Details,
-            password: hashedPassword, images: req.files
+            password: hashedPassword, images: imageUrls
         });
         await newUser.save();
         return res.status(200).json({ message: 'Registration successfull' })
