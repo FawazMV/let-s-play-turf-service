@@ -2,7 +2,7 @@ import turfmodel from "../Models/turfModel.js";
 
 export const getAllTurfs = (req, res, next) => {
     try {
-        turfmodel.find({ request: true, block: false }).then((turfs) => res.status(200).json(turfs))
+        turfmodel.find({ request: true, block: false }, { password: -1, createdAt: -1, updatedAt: -1, __v: -1 }).then((turfs) => res.status(200).json(turfs))
             .catch((err) => next(err));
     }
     catch (err) {
