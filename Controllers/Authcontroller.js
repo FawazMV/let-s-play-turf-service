@@ -14,6 +14,7 @@ export const registration = async (req, res, next) => {
         const imageUrls = [];
         for (const file of req.files) {
             const imageUrl = await uploadImageToFirebase(file);
+            console.log(imageUrl);
             imageUrls.push({ location: imageUrl });
         }
 

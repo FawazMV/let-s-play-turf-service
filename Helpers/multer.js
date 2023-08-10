@@ -42,7 +42,10 @@ export const uploadImageToFirebase = async (file) => {
     //     reader.onload = () => resolve(reader.result);
     //     reader.onerror = (error) => reject(error);
     // })
-    return file.buffer.toString('base64');
+    const imageMimeType = 'image/jpeg';
+    const base64Image = file.buffer.toString('base64');
+    const image = `data:${imageMimeType};base64,${base64Image}`;
+    return image;
 };
 
 
