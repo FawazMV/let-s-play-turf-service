@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import { otpcallin, verifyOtp } from '../Helpers/Otp.js';
 import turfmodel from '../Models/turfModel.js';
 import jwt from 'jsonwebtoken'
+import { uploadImageToFirebase } from '../Helpers/multer.js';
 
 export const registration = async (req, res, next) => {
     try {
@@ -24,6 +25,7 @@ export const registration = async (req, res, next) => {
         return res.status(200).json({ message: 'Registration successfull' })
     }
     catch (err) {
+        console.log(err)
         next(err)
     }
 }

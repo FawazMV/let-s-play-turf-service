@@ -1,32 +1,9 @@
-// import multer from "multer";
-// import * as dotenv from "dotenv";
-// dotenv.config();
-// import AWS from 'aws-sdk';
-// import multerS3 from "multer-s3";
-
-// const s3 = new AWS.S3({
-//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//     region: process.env.AWS_REGION,
-// });
-
-// const storage = multerS3({
-//     s3: s3,
-//     bucket: process.env.AWS_BUCKET_NAME,
-//     key: function (req, file, cb) {
-//         cb(null, 'Turf_Photos/' + Date.now().toString() + file.originalname);
-//     },
-// });
-
-// const upload = multer({ storage });
-
-// export default upload;
+import { initializeApp, getApp, getApps } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
-import * as dotenv from "dotenv";
-dotenv.config();
-import * as firebase from 'firebase/app';
-import 'firebase/storage';
 import multer from "multer";
 
 // Initialize Firebase
@@ -39,7 +16,11 @@ const firebaseConfig = {
     appId: process.env.FIREBASE_APP_ID
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+export const Auth = getAuth(app);
+export const db = getFirestore();
+export const storage = getStorage()
+
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -48,4 +29,21 @@ const upload = multer({
     }
 });
 
-export default upload;
+
+
+export const uploadImageToFirebase = async (file) => {
+    // const storageRef = ref(storage, 'Turf_Photos/' + Date.now().toString() + file.originalname);
+    // const snapshot = await uploadBytes(storageRef, file.buffer);
+    // const downloadURL = await getDownloadURL(snapshot.ref);
+    // return downloadURL;
+    // new Promise((resolve, reject) => {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = () => resolve(reader.result);
+    //     reader.onerror = (error) => reject(error);
+    // })
+    return file.buffer.toString('base64');
+};
+
+
+export default upload
